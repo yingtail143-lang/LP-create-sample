@@ -4,12 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Implementation is in progress (Next.js scaffolded, Hero/ファーストビュー section built; remaining sections from the spec are not yet implemented). Before doing implementation work, read both planning docs in full:
+All 8 sections from the spec are implemented on `/` (Hero → Problem → Features → Trainer → Pricing → Testimonial → FAQ → Contact), plus a `/thanks` page the contact form redirects to. Before doing further implementation work, read both planning docs in full:
 
 - `仕様書.md` — the project spec: goal, target audience, required page/sections, tech stack (Next.js + Tailwind CSS), and priorities (mobile display, load speed, CTA, basic SEO).
 - `設計書.md` — the approved site structure and component design (page routing, section breakdown, planned directory layout under `app/`, `components/`, `data/`, `lib/`, and the SEO/performance approach). Treat this as the source of truth for how the project should be structured.
 
 Follow the directory structure and component boundaries laid out in `設計書.md` rather than inventing a new structure, unless the user asks to change the design.
+
+### Known gaps before this can go live
+
+- **Placeholder content that must be replaced with real data**, each flagged with a comment at its source: `data/trainers.ts` (fabricated trainer names/bios/photos-as-initials), `data/pricing.ts` (invented prices/plan contents), `data/testimonials.ts` (fabricated member quotes — publishing these as real testimonials without genuine, consented reviews risks 景品表示法/stealth-marketing violations, not just an accuracy issue).
+- **`components/contact/actions.ts` doesn't actually notify anyone yet.** It validates and logs to the server console, then redirects to `/thanks`. Wiring it to a real destination (email via Resend/SendGrid, a CRM, a spreadsheet, etc.) needs a decision on which service plus credentials — ask the user before picking one.
+- No sticky mobile CTA bar, header/footer, or `/thanks`-based conversion tracking (GA4/ads tag) yet — mentioned as recommended in `設計書.md` but not requested/built so far.
 
 ## Commands
 
