@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ConversionEvent from "@/components/analytics/ConversionEvent";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 export default function ThanksPage() {
   return (
     <main className="flex min-h-[100svh] flex-col items-center justify-center gap-6 bg-slate-50 px-6 py-24 text-center">
+      {/* このページの表示 = フォーム送信成功、としてGA4にコンバージョンを送信 */}
+      <ConversionEvent />
       <span className="text-sm font-bold tracking-widest text-orange-700">
         THANK YOU
       </span>
