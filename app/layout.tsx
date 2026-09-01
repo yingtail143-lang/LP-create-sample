@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "無料カウンセリング受付中 | パーソナルジム",
-  description:
-    "30〜50代の会社員向けパーソナルジム。専属トレーナーによるオーダーメイドのトレーニングで、忙しくても続けられるダイエット・運動不足解消をサポートします。まずは無料カウンセリングへ。",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  // og:image / twitter:image は app/opengraph-image.tsx から自動生成される
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
