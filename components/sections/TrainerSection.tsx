@@ -34,7 +34,7 @@ export default function TrainerSection() {
                 <h3 className="text-lg font-bold text-slate-900">
                   {trainer.name}
                 </h3>
-                <span className="text-sm font-medium text-orange-600">
+                <span className="text-sm font-medium text-orange-700">
                   {trainer.role}
                 </span>
               </div>

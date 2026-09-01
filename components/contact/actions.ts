@@ -1,7 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { contactSchema, type ContactFormState } from "./contactSchema";
+import type { ContactFormState } from "./contactFormState";
+import { contactSchema } from "./contactSchema";
 
 /**
  * お問い合わせフォームの送信処理（Server Action）。

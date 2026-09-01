@@ -30,12 +30,3 @@ export const contactSchema = z.object({
 });
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
-
-/** Server Action (submitContactForm) の状態。useActionState と共に使用する */
-export type ContactFormState = {
-  status: "idle" | "error";
-  errors?: Record<string, string[]>;
-  values?: Record<string, string>;
-};
-
-export const initialContactFormState: ContactFormState = { status: "idle" };

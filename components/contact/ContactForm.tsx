@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import Button from "@/components/ui/Button";
 import FormField from "@/components/ui/FormField";
 import { submitContactForm } from "./actions";
-import { initialContactFormState } from "./contactSchema";
+import { initialContactFormState } from "./contactFormState";
 
 /** お問い合わせフォーム本体。バリデーションと送信はServer Action側で行う */
 export default function ContactForm() {

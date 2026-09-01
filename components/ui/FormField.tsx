@@ -23,7 +23,7 @@ export default function FormField({
   const hasError = Boolean(errors?.length);
   const errorId = `${name}-error`;
 
-  const fieldClasses = `rounded-xl border px-4 py-3 text-sm text-slate-900 outline-none transition-colors focus:border-orange-500 ${
+  const fieldClasses = `rounded-xl border px-4 py-3 text-sm text-slate-900 outline-none transition-colors focus:border-orange-700 ${
     hasError ? "border-red-400" : "border-slate-300"
   }`;
 
@@ -32,7 +32,7 @@ export default function FormField({
       <label htmlFor={name} className="text-sm font-bold text-slate-900">
         {label}
         {required && (
-          <span aria-hidden className="ml-1 text-orange-500">
+          <span aria-hidden className="ml-1 text-orange-700">
             *
           </span>
         )}

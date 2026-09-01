@@ -25,7 +25,7 @@ export default function PricingSection() {
               }`}
             >
               {plan.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-orange-500 px-4 py-1 text-xs font-bold text-white">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-orange-700 px-4 py-1 text-xs font-bold text-white">
                   {plan.badge}
                 </span>
               )}

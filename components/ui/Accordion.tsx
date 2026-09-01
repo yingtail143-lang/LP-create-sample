@@ -38,7 +38,7 @@ export default function Accordion({ items }: AccordionProps) {
               </span>
               <span
                 aria-hidden
-                className={`shrink-0 text-xl leading-none font-bold text-orange-500 transition-transform duration-150 ${
+                className={`shrink-0 text-xl leading-none font-bold text-orange-700 transition-transform duration-150 ${
                   isOpen ? "rotate-45" : ""
                 }`}
               >

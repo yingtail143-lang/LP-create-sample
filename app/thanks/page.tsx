@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ThanksPage() {
   return (
     <main className="flex min-h-[100svh] flex-col items-center justify-center gap-6 bg-slate-50 px-6 py-24 text-center">
-      <span className="text-sm font-bold tracking-widest text-orange-600">
+      <span className="text-sm font-bold tracking-widest text-orange-700">
         THANK YOU
       </span>
       <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">

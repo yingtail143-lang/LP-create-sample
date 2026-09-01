@@ -13,9 +13,28 @@ Follow the directory structure and component boundaries laid out in `設計書.m
 
 ### Known gaps before this can go live
 
-- **Placeholder content that must be replaced with real data**, each flagged with a comment at its source: `data/trainers.ts` (fabricated trainer names/bios/photos-as-initials), `data/pricing.ts` (invented prices/plan contents), `data/testimonials.ts` (fabricated member quotes — publishing these as real testimonials without genuine, consented reviews risks 景品表示法/stealth-marketing violations, not just an accuracy issue).
-- **`components/contact/actions.ts` doesn't actually notify anyone yet.** It validates and logs to the server console, then redirects to `/thanks`. Wiring it to a real destination (email via Resend/SendGrid, a CRM, a spreadsheet, etc.) needs a decision on which service plus credentials — ask the user before picking one.
-- No sticky mobile CTA bar, header/footer, or `/thanks`-based conversion tracking (GA4/ads tag) yet — mentioned as recommended in `設計書.md` but not requested/built so far.
+- **Placeholder content that must be replaced with real data**, each flagged with a comment at its source: `data/trainers.ts` (fabricated trainer names/bios/photos-as-initials), `data/pricing.ts` (invented prices/plan contents), `data/testimonials.ts` (fabricated member quotes — publishing these as real testimonials without genuine, consented reviews risks 景品表示法/stealth-marketing violations, not just an accuracy issue), `components/layout/Header.tsx` / `Footer.tsx` (brand name is the placeholder wordmark "PERSONAL GYM", not a real logo).
+- **`components/contact/actions.ts` doesn't actually notify anyone.** It validates and logs to the server console, then redirects to `/thanks`. This project is a portfolio sample, not a real business — per the user, wiring it to a real notification destination (email/CRM/etc.) is intentionally out of scope; don't add it unless asked.
+- **`components/layout/Footer.tsx`'s legal links (プライバシーポリシー／特定商取引法に基づく表記) point to `#`.** The form collects personal data, so real pages with real business info are needed before launch — don't fabricate their content; ask the user for the actual business details.
+- No `/thanks`-based conversion tracking (GA4/ads tag) yet.
+
+### Layout components (added after the 8 sections)
+
+- `components/layout/Header.tsx` — sticky top nav; anchor links + CTA hidden below `md`/`sm` to keep mobile minimal (the persistent CTA role is `StickyMobileCta`'s job on mobile).
+- `components/layout/Footer.tsx` — brand, anchor quick-links, legal-link placeholders, dynamic copyright year.
+- `components/layout/StickyMobileCta.tsx` — Client Component, `sm:hidden`; uses an `IntersectionObserver` on `#contact` to self-hide once the form's own CTA is in view, so the two don't visually stack. `app/page.tsx` adds `pb-20 sm:pb-0` to `<main>` to keep this bar from covering content.
+- **Gotcha hit once, worth remembering:** `ui/Button.tsx`'s `baseClasses` always includes `inline-flex` unconditionally. Passing `className="hidden sm:inline-flex"` to `<Button>` does **not** hide it below `sm` — both `hidden` and the base `inline-flex` are unconditional utility classes on the same element, and Tailwind's compiled-CSS order (not the class-string order) decides the winner, which favored `inline-flex`. Fix: control visibility from a wrapping element (`<div className="hidden sm:block"><Button ... /></div>`) instead of passing display-toggling classes into `Button`'s own `className`.
+
+### Review findings applied (see `レビュー.md` for the full audit)
+
+- **Brand orange is `orange-700`/`orange-800`, not `orange-500`/`orange-600`.** axe-core found `orange-500` (bg) and `orange-600` (text) fail WCAG AA contrast (2.88–3.6:1 vs the 4.5:1 required) everywhere they were used — CTA buttons, badges, eyebrow labels, icons. Verified via luminance calculation and a re-run of axe-core (0 `color-contrast` violations after the change) that `orange-700`+ passes. Don't reintroduce `orange-500`/`orange-600` for text-on-light or white-text-on-orange usage without re-checking contrast.
+- **`components/contact/contactSchema.ts` and `components/contact/contactFormState.ts` are deliberately separate files.** `contactSchema.ts` holds the zod schema (server-only — imported only by `actions.ts`, a `"use server"` file). `contactFormState.ts` holds the plain `ContactFormState` type and `initialContactFormState` constant that `ContactForm.tsx` (a Client Component) needs — it has zero zod import. Co-locating these previously leaked the whole zod library (~87KB gzip) into the client bundle, since `ContactForm.tsx` imported from the same module that also defined the zod schema; Next.js's client bundler included the schema too despite it being unused client-side. Verified by grepping the built `.next/static/chunks/*.js` for the string `"zod"` before/after. Keep any future zod (or other server-only-library) schema in a file that no Client Component imports from.
+
+### Still open (not addressed, and out of scope per the user — this is a portfolio sample, not a real client site)
+
+- `landmark-unique` a11y violation (axe-core): Header's and Footer's `<nav>` elements both lack an accessible name.
+- `region` a11y violation (axe-core, mobile): `StickyMobileCta`'s fixed div isn't contained in any landmark.
+- No sitemap/robots/OGP/structured data, no NAP info, no real legal pages, no conversion tracking — see `レビュー.md` for the full list.
 
 ## Commands
 

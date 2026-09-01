@@ -31,7 +31,10 @@ const baseClasses =
   "inline-flex items-center justify-center gap-2 rounded-full font-bold text-center transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400";
 
 const variantClasses: Record<Variant, string> = {
-  primary: "bg-orange-500 text-white hover:bg-orange-400 active:bg-orange-600",
+  // bg-orange-500 は白文字とのコントラストが2.88:1でWCAG AA(4.5:1)未達だったため
+  // orange-700系に変更（axe-coreで4.5:1以上を確認済み）。hover/activeは押下感を出しつつ
+  // 常に基準を満たすよう明るくせず段階的に暗くする方向で統一。
+  primary: "bg-orange-700 text-white hover:bg-orange-800 active:bg-orange-900",
   secondary:
     "border border-white/40 bg-transparent text-white hover:bg-white/10",
 };

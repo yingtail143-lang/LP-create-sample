@@ -19,7 +19,7 @@ export default function FeaturesSection() {
             <Card key={feature.title} className="flex gap-4">
               <span
                 aria-hidden
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-700 text-sm font-bold text-white"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>

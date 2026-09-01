@@ -18,7 +18,7 @@ export default function TestimonialSection() {
           {testimonials.map((testimonial) => (
             <Card key={testimonial.name} className="flex flex-col gap-4">
               {testimonial.result && (
-                <span className="self-start rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-600">
+                <span className="self-start rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-800">
                   {testimonial.result}
                 </span>
               )}

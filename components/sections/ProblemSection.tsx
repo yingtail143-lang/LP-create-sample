@@ -21,7 +21,7 @@ export default function ProblemSection() {
             <Card key={problem.title} className="flex gap-4">
               <span
                 aria-hidden
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-lg font-bold text-orange-600"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-100 text-lg font-bold text-orange-700"
               >
                 !
               </span>

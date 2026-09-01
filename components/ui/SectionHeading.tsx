@@ -18,7 +18,8 @@ const toneClasses: Record<Tone, { title: string; description: string; eyebrow: s
   light: {
     title: "text-slate-900",
     description: "text-slate-600",
-    eyebrow: "text-orange-600",
+    // text-orange-600 は白/薄いグレー背景で3.4〜3.6:1までしか出ずWCAG AA(4.5:1)未達だったため強化
+    eyebrow: "text-orange-700",
   },
   dark: {
     title: "text-white",
